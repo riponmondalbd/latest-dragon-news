@@ -5,7 +5,7 @@ const LoginPage = () => {
   return (
     <div>
       <Navbar />
-      <div className="md:w-1/2 mx-auto border p-[75px] mt-28 shadow-xl">
+      <div className="md:w-1/2 mx-auto border p-[75px] mt-28 shadow-xl mb-12">
         <h2 className="text-center text-[35px] font-semibold mt-10">
           Login your account
         </h2>
