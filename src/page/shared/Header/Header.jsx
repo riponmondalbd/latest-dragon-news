@@ -5,9 +5,11 @@ const Header = () => {
   return (
     <div className="text-center">
       <Link to={"/"}>
-        <img className="mx-auto" src={logo} alt="logo" />
+        <img className="mx-auto mt-[50px]" src={logo} alt="logo" />
       </Link>
-      <p>Journalism Without Fear or Favour</p>
+      <p className="text-lg text-[#706F6F] font-normal mt-5 mb-[10px]">
+        Journalism Without Fear or Favour
+      </p>
     </div>
   );
 };
