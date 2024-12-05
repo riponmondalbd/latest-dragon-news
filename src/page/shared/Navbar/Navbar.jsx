@@ -1,6 +1,29 @@
+import { Link, NavLink } from "react-router-dom";
 import user from "../../../assets/user.png";
 
 const Navbar = () => {
+  const navLinks = (
+    <>
+      <li>
+        <NavLink className={"text-lg font-normal text-[#706F6F]"} to={"/"}>
+          Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink className={"text-lg font-normal text-[#706F6F]"} to={"/about"}>
+          About
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={"text-lg font-normal text-[#706F6F]"}
+          to={"/career"}
+        >
+          Career
+        </NavLink>
+      </li>
+    </>
+  );
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -25,48 +48,12 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Parent</a>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
+            {navLinks}
           </ul>
         </div>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          <li>
-            <a>Item 1</a>
-          </li>
-          <li>
-            <details>
-              <summary>Parent</summary>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </details>
-          </li>
-          <li>
-            <a>Item 3</a>
-          </li>
-        </ul>
+        <ul className="menu menu-horizontal px-1">{navLinks}</ul>
       </div>
       <div className="navbar-end gap-[9px]">
         <div
@@ -78,7 +65,9 @@ const Navbar = () => {
             <img alt="Tailwind CSS Navbar component" src={user} />
           </div>
         </div>
-        <a className="btn">Button</a>
+        <Link className="text-xl font-semibold text-white bg-[#403F3F] py-[9px] px-[43px]">
+          Login
+        </Link>
       </div>
     </div>
   );
