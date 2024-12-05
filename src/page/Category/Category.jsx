@@ -7,7 +7,7 @@ const Category = ({ category }) => {
   return (
     <div className="my-11">
       <NavLink
-        className={"text-xl text-[#9F9F9F] font-medium ml-[50px]"}
+        className={"text-xl text-[#9F9F9F] font-medium lg:ml-[30px]"}
         to={`/category/${id}`}
       >
         {name}
