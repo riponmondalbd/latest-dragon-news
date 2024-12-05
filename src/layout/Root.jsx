@@ -1,9 +1,9 @@
-import React from "react";
+import { Outlet } from "react-router-dom";
 
 const Root = () => {
   return (
-    <div>
-      <h2>Hello from root</h2>
+    <div className="font-poppins">
+      <Outlet />
     </div>
   );
 };
