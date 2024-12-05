@@ -1,16 +1,38 @@
 import { Link } from "react-router-dom";
 import Navbar from "../shared/Navbar/Navbar";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   return (
     <div>
       <Navbar />
       <div className="md:w-1/2 mx-auto border p-[75px] mt-28 shadow-xl">
         <h2 className="text-center text-[35px] font-semibold mt-10">
-          Login your account
+          Register your account
         </h2>
         <div className="border-b-[1px] border-[#E7E7E7] mt-[50px] mb-[10px]"></div>
-        <form className="card-body ">
+        <form className="card-body">
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Name</span>
+            </label>
+            <input
+              type="text"
+              placeholder="name"
+              className="input input-bordered"
+              required
+            />
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Photo</span>
+            </label>
+            <input
+              type="text"
+              placeholder="phot url"
+              className="input input-bordered"
+              required
+            />
+          </div>
           <div className="form-control">
             <label className="label">
               <span className="label-text">Email</span>
@@ -32,20 +54,15 @@ const LoginPage = () => {
               className="input input-bordered"
               required
             />
-            <label className="label">
-              <a href="#" className="label-text-alt link link-hover">
-                Forgot password?
-              </a>
-            </label>
           </div>
           <div className="form-control mt-6">
-            <button className="btn btn-neutral">Login</button>
+            <button className="btn btn-neutral">Register</button>
           </div>
         </form>
         <p className="text-center text-base font-semibold text-[#706F6F]">
-          Do not Have An Account ?{" "}
-          <Link className="text-[#FF8C47]" to={"/register"}>
-            Register
+          Already have Account? Please{" "}
+          <Link className="text-[#FF8C47]" to={"/login"}>
+            Login
           </Link>
         </p>
       </div>
@@ -53,4 +70,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
