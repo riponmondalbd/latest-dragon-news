@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Navbar from "../shared/Navbar/Navbar";
 
 const Career = () => {
@@ -13,7 +14,9 @@ const Career = () => {
               excepturi exercitationem quasi. In deleniti eaque aut repudiandae
               et a id nisi.
             </p>
-            <button className="btn btn-neutral">Get Started</button>
+            <Link to={"/"}>
+              <button className="btn btn-neutral">Get Started</button>
+            </Link>
           </div>
         </div>
       </div>
