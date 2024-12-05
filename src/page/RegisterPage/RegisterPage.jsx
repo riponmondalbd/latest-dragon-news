@@ -55,6 +55,15 @@ const RegisterPage = () => {
               required
             />
           </div>
+          <div className="flex mt-5">
+            <input type="checkbox" name="terms" id="terms" />
+            <label
+              className="font-normal text-[#706F6F] ml-[10px]"
+              htmlFor="terms"
+            >
+              Accept <span className="font-semibold">Term & Conditions</span>
+            </label>
+          </div>
           <div className="form-control mt-6">
             <button className="btn btn-neutral">Register</button>
           </div>
