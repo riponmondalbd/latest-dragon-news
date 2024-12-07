@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import {
   IoLogoFacebook,
@@ -9,14 +10,25 @@ import bg from "../../../assets/bg.png";
 import qZone1 from "../../../assets/qZone1.png";
 import qZone2 from "../../../assets/qZone2.png";
 import qZone3 from "../../../assets/qZone3.png";
+import { AuthContext } from "../../../provider/AuthProvider";
 
 const RightSideNav = () => {
+  const { googleLogin } = useContext(AuthContext);
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   return (
     <div>
       {/* google twitter login */}
       <div>
         <p className="text-xl font-semibold text-[#403F3F] mb-5">Login With</p>
-        <button className="btn w-full mb-2">
+        <button onClick={handleGoogleLogin} className="btn w-full mb-2">
           <FaGoogle />
           Google
         </button>
