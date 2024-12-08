@@ -1,11 +1,13 @@
 import { sendEmailVerification, updateProfile } from "firebase/auth";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import Navbar from "../shared/Navbar/Navbar";
 
 const RegisterPage = () => {
   const { createUser } = useContext(AuthContext);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleRegisterUser = (e) => {
     e.preventDefault();
@@ -14,6 +16,32 @@ const RegisterPage = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     const terms = e.target.terms.checked;
+
+    // reset success and error message
+    setSuccess("");
+    setErrorMessage("");
+
+    if (password.length < 6) {
+      setErrorMessage("Password must be 6 character or longer");
+      return;
+    } else if (!/[0-9]/.test(password)) {
+      setErrorMessage("Password must contain at least one Digit");
+      return;
+    } else if (!/[a-z]/.test(password)) {
+      setErrorMessage("Password must be contain at least one letter");
+      return;
+    } else if (!/[A-Z]/.test(password)) {
+      setErrorMessage("Password must be contain one uppercase");
+      return;
+    } else if (
+      !/^(?=.*[~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹]).*$/.test(password)
+    ) {
+      setErrorMessage("Password must contain at least one Special Character");
+      return;
+    } else if (!terms) {
+      setErrorMessage("Please accept Terms and conditions");
+      return;
+    }
 
     // register a user
     createUser(email, password)
@@ -37,12 +65,12 @@ const RegisterPage = () => {
             console.error(error);
           });
         console.log(result.user);
+        setSuccess("User Create Successfully");
       })
       .catch((error) => {
         console.error(error);
+        setErrorMessage(error.message);
       });
-
-    console.log(name, photo, email, password, terms);
   };
   return (
     <div>
@@ -113,13 +141,19 @@ const RegisterPage = () => {
           <div className="form-control mt-6">
             <button className="btn btn-neutral">Register</button>
           </div>
+          <p className="text-center text-base font-semibold text-[#706F6F]">
+            Already have Account? Please{" "}
+            <Link className="text-[#FF8C47]" to={"/login"}>
+              Login
+            </Link>
+          </p>
         </form>
-        <p className="text-center text-base font-semibold text-[#706F6F]">
-          Already have Account? Please{" "}
-          <Link className="text-[#FF8C47]" to={"/login"}>
-            Login
-          </Link>
-        </p>
+        {success && (
+          <p className="text-center text-green-600 font-bold">{success}</p>
+        )}
+        {errorMessage && (
+          <p className="text-center text-red-400 font-bold">{errorMessage}</p>
+        )}
       </div>
     </div>
   );
