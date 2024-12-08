@@ -1,11 +1,14 @@
 import { useContext, useRef, useState } from "react";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import Navbar from "../shared/Navbar/Navbar";
 
 const LoginPage = () => {
   const { logInUser, resetEmail } = useContext(AuthContext);
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const [errorMessage, setErrorMessage] = useState("");
   const [success, setSuccess] = useState("");
@@ -23,6 +26,7 @@ const LoginPage = () => {
         console.log(result.user);
         setSuccess("Login successfully");
         e.target.reset();
+        navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
         console.error(error);
