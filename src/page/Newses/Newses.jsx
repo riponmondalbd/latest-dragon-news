@@ -4,7 +4,7 @@ import { FaEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Newses = ({ news }) => {
-  const { author, image_url, title, details, rating, total_view } = news;
+  const { _id, author, image_url, title, details, rating, total_view } = news;
   return (
     <div className="mb-[30px] border rounded-md">
       <div className="flex justify-between items-center bg-[#F3F3F3] py-4 px-5 ">
@@ -36,7 +36,9 @@ const Newses = ({ news }) => {
         {details.length > 180 ? (
           <p className="text-base text-[#706F6F] font-normal mt-8">
             {details.slice(0, 180)} <br />
-            <Link className="text-[#FF8C47] font-semibold">Read More</Link>
+            <Link to={`/news/${_id}`} className="text-[#FF8C47] font-semibold">
+              Read More
+            </Link>
           </p>
         ) : (
           <p className="text-base text-[#706F6F] font-normal mt-8">{details}</p>
@@ -94,6 +96,7 @@ Newses.propTypes = {
       name: PropTypes.node,
       published_date: PropTypes.node,
     }),
+    _id: PropTypes.node,
     image_url: PropTypes.node,
     title: PropTypes.node,
     details: PropTypes.node,

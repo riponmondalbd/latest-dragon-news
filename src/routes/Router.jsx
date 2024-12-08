@@ -5,6 +5,7 @@ import Career from "../page/Career/Career";
 import ErrorPage from "../page/ErrorPage/ErrorPage";
 import Home from "../page/Home/Home";
 import LoginPage from "../page/LoginPage/LoginPage";
+import News from "../page/News/News";
 import RegisterPage from "../page/RegisterPage/RegisterPage";
 
 const router = createBrowserRouter([
@@ -17,6 +18,11 @@ const router = createBrowserRouter([
         path: "/",
         loader: () => fetch("/news.json"),
         element: <Home />,
+      },
+      {
+        path: "/news/:id",
+        loader: () => fetch("/news.json"),
+        element: <News />,
       },
       {
         path: "/login",

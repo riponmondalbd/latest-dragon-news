@@ -42,11 +42,14 @@ const RightSideNav = () => {
       {/* google twitter login */}
       <div>
         <p className="text-xl font-semibold text-[#403F3F] mb-5">Login With</p>
-        <button onClick={handleGoogleLogin} className="btn w-full mb-2">
+        <button
+          onClick={handleGoogleLogin}
+          className="btn btn-outline w-full mb-2"
+        >
           <FaGoogle />
           Google
         </button>
-        <button onClick={handleGithubLogin} className="btn w-full">
+        <button onClick={handleGithubLogin} className="btn btn-outline w-full">
           <FaGithub />
           Github
         </button>
