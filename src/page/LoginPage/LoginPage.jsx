@@ -1,15 +1,16 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import Navbar from "../shared/Navbar/Navbar";
 
 const LoginPage = () => {
-  const { logInUser } = useContext(AuthContext);
+  const { logInUser, resetEmail } = useContext(AuthContext);
 
   const [errorMessage, setErrorMessage] = useState("");
   const [success, setSuccess] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const emailRef = useRef(null);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -32,6 +33,29 @@ const LoginPage = () => {
     setSuccess("");
     setErrorMessage("");
   };
+
+  const handleForgetPassword = () => {
+    const email = emailRef.current.value;
+    console.log(email);
+    if (!email) {
+      setErrorMessage("Please provide an email");
+      return;
+    } else if (
+      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)
+    ) {
+      setErrorMessage("Please write a valid email");
+      return;
+    }
+
+    // send validation email
+    resetEmail(email)
+      .then(() => {
+        alert("Please check your email");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   return (
     <div>
       <Navbar />
@@ -47,6 +71,7 @@ const LoginPage = () => {
             </label>
             <input
               type="email"
+              ref={emailRef}
               name="email"
               placeholder="email"
               className="input input-bordered"
@@ -65,7 +90,10 @@ const LoginPage = () => {
               required
             />
             <label className="label">
-              <a href="#" className="label-text-alt link link-hover">
+              <a
+                onClick={handleForgetPassword}
+                className="label-text-alt link link-hover"
+              >
                 Forgot password?
               </a>
             </label>
