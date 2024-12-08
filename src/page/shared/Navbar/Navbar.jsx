@@ -74,14 +74,14 @@ const Navbar = () => {
           className="btn btn-ghost btn-circle avatar"
         >
           <div className="w-10 rounded-full">
-            {user?.email ? (
+            {user ? (
               <img alt="Tailwind CSS Navbar component" src={user?.photoURL} />
             ) : (
               <img alt="Tailwind CSS Navbar component" src={userImg} />
             )}
           </div>
         </div>
-        {user?.email ? (
+        {user ? (
           <Link
             className="text-xl font-semibold text-white bg-[#403F3F] py-[9px] px-[43px]"
             onClick={handleSignOut}

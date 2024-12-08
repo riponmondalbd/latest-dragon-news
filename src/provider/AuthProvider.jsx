@@ -1,5 +1,6 @@
 import {
   getAuth,
+  GithubAuthProvider,
   GoogleAuthProvider,
   onAuthStateChanged,
   signInWithPopup,
@@ -14,6 +15,7 @@ const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
   const googleProvider = new GoogleAuthProvider();
+  const gitHubProvide = new GithubAuthProvider();
 
   const [user, setUser] = useState(null);
   const [loader, setLoader] = useState(true);
@@ -24,8 +26,15 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
 
+  // github login
+  const gitHubLogin = () => {
+    setLoader(true);
+    return signInWithPopup(auth, gitHubProvide);
+  };
+
   // logout user
   const logOut = () => {
+    setLoader(true);
     return signOut(auth);
   };
 
@@ -42,7 +51,7 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
-  const authInfo = { user, loader, googleLogin, logOut };
+  const authInfo = { user, loader, googleLogin, logOut, gitHubLogin };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );

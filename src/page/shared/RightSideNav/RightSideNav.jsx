@@ -13,7 +13,9 @@ import qZone3 from "../../../assets/qZone3.png";
 import { AuthContext } from "../../../provider/AuthProvider";
 
 const RightSideNav = () => {
-  const { googleLogin } = useContext(AuthContext);
+  const { googleLogin, gitHubLogin } = useContext(AuthContext);
+
+  // google login
   const handleGoogleLogin = () => {
     googleLogin()
       .then((result) => {
@@ -23,6 +25,18 @@ const RightSideNav = () => {
         console.error(error);
       });
   };
+
+  // github login
+  const handleGithubLogin = () => {
+    gitHubLogin()
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <div>
       {/* google twitter login */}
@@ -32,7 +46,7 @@ const RightSideNav = () => {
           <FaGoogle />
           Google
         </button>
-        <button className="btn w-full">
+        <button onClick={handleGithubLogin} className="btn w-full">
           <FaGithub />
           Github
         </button>
