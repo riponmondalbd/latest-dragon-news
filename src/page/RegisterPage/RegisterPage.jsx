@@ -55,9 +55,7 @@ const RegisterPage = () => {
           photoURL: photo,
         })
           .then(() => {})
-          .catch((error) => {
-            console.error(error);
-          });
+          .catch(() => {});
 
         // email verification
         sendEmailVerification(result.user)
@@ -66,14 +64,10 @@ const RegisterPage = () => {
             e.target.reset();
             alert("check your email and verify account");
           })
-          .catch((error) => {
-            console.error(error);
-          });
-        console.log(result.user);
+          .catch(() => {});
         setSuccess("User Create Successfully");
       })
       .catch((error) => {
-        console.error(error);
         setErrorMessage(error.message);
       });
   };

@@ -22,14 +22,12 @@ const LoginPage = () => {
 
     // login user
     logInUser(email, password)
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
         setSuccess("Login successfully");
         e.target.reset();
         navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
-        console.error(error);
         setErrorMessage(error.message);
       });
 

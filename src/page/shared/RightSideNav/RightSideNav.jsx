@@ -5,7 +5,7 @@ import {
   IoLogoInstagram,
   IoLogoTwitter,
 } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import bg from "../../../assets/bg.png";
 import qZone1 from "../../../assets/qZone1.png";
 import qZone2 from "../../../assets/qZone2.png";
@@ -15,26 +15,25 @@ import { AuthContext } from "../../../provider/AuthProvider";
 const RightSideNav = () => {
   const { googleLogin, gitHubLogin } = useContext(AuthContext);
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
   // google login
   const handleGoogleLogin = () => {
     googleLogin()
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
+        navigate(location?.state ? location.state : "/");
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch(() => {});
   };
 
   // github login
   const handleGithubLogin = () => {
     gitHubLogin()
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
+        navigate(location?.state ? location.state : "/");
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch(() => {});
   };
 
   return (
