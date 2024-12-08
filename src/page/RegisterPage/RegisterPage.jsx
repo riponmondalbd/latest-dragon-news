@@ -1,13 +1,16 @@
 import { sendEmailVerification, updateProfile } from "firebase/auth";
 import { useContext, useState } from "react";
+import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import Navbar from "../shared/Navbar/Navbar";
 
 const RegisterPage = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, logOut } = useContext(AuthContext);
+
   const [errorMessage, setErrorMessage] = useState("");
   const [success, setSuccess] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleRegisterUser = (e) => {
     e.preventDefault();
@@ -59,6 +62,8 @@ const RegisterPage = () => {
         // email verification
         sendEmailVerification(result.user)
           .then(() => {
+            logOut();
+            e.target.reset();
             alert("check your email and verify account");
           })
           .catch((error) => {
@@ -75,12 +80,12 @@ const RegisterPage = () => {
   return (
     <div>
       <Navbar />
-      <div className="md:w-1/2 mx-auto border p-[75px] mt-28 shadow-xl mb-12">
+      <div className="lg:w-1/2 mx-auto border md:p-[75px] mt-28 shadow-xl mb-12">
         <h2 className="text-center text-[35px] font-semibold mt-10">
           Register your account
         </h2>
         <div className="border-b-[1px] border-[#E7E7E7] mt-[50px] mb-[10px]"></div>
-        <form onSubmit={handleRegisterUser} className="card-body">
+        <form onSubmit={handleRegisterUser} className="card-body relative">
           <div className="form-control">
             <label className="label">
               <span className="label-text">Name</span>
@@ -122,12 +127,18 @@ const RegisterPage = () => {
               <span className="label-text">Password</span>
             </label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               placeholder="password"
               className="input input-bordered"
               required
             />
+          </div>
+          <div
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-11 bottom-[210px]"
+          >
+            {showPassword ? <IoMdEyeOff /> : <IoMdEye />}
           </div>
           <div className="flex mt-5">
             <input type="checkbox" name="terms" id="terms" />
