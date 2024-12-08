@@ -36,7 +36,7 @@ const LoginPage = () => {
 
   const handleForgetPassword = () => {
     const email = emailRef.current.value;
-    console.log(email);
+
     if (!email) {
       setErrorMessage("Please provide an email");
       return;
