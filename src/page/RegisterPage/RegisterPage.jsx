@@ -1,7 +1,49 @@
+import { sendEmailVerification, updateProfile } from "firebase/auth";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../provider/AuthProvider";
 import Navbar from "../shared/Navbar/Navbar";
 
 const RegisterPage = () => {
+  const { createUser } = useContext(AuthContext);
+
+  const handleRegisterUser = (e) => {
+    e.preventDefault();
+    const name = e.target.name.value;
+    const photo = e.target.photo.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const terms = e.target.terms.checked;
+
+    // register a user
+    createUser(email, password)
+      .then((result) => {
+        // update user profile
+        updateProfile(result.user, {
+          displayName: name,
+          photoURL: photo,
+        })
+          .then(() => {})
+          .catch((error) => {
+            console.error(error);
+          });
+
+        // email verification
+        sendEmailVerification(result.user)
+          .then(() => {
+            alert("check your email and verify account");
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    console.log(name, photo, email, password, terms);
+  };
   return (
     <div>
       <Navbar />
@@ -10,13 +52,14 @@ const RegisterPage = () => {
           Register your account
         </h2>
         <div className="border-b-[1px] border-[#E7E7E7] mt-[50px] mb-[10px]"></div>
-        <form className="card-body">
+        <form onSubmit={handleRegisterUser} className="card-body">
           <div className="form-control">
             <label className="label">
               <span className="label-text">Name</span>
             </label>
             <input
               type="text"
+              name="name"
               placeholder="name"
               className="input input-bordered"
               required
@@ -28,6 +71,7 @@ const RegisterPage = () => {
             </label>
             <input
               type="text"
+              name="photo"
               placeholder="phot url"
               className="input input-bordered"
               required
@@ -39,6 +83,7 @@ const RegisterPage = () => {
             </label>
             <input
               type="email"
+              name="email"
               placeholder="email"
               className="input input-bordered"
               required
@@ -50,6 +95,7 @@ const RegisterPage = () => {
             </label>
             <input
               type="password"
+              name="password"
               placeholder="password"
               className="input input-bordered"
               required
